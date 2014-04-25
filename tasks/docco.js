@@ -40,6 +40,19 @@ module.exports = function ( grunt ) {
                         done();
                     }
                 } );
+                // we need to copy from the docco resource directory to 
+                // the correct place, docco seems to fail at this
+                grunt.file.recurse( __dirname + "/../node_modules/docco/resources/classic/", function ( abspath, rootdir, subdir, filename ) {
+                    var filepath = __dirname + "/../../../",
+                        path = require( "path" );
+
+                    if ( subdir ) {
+                        grunt.file.mkdir( outdir + "/" + subdir );
+                        if ( abspath ) {
+                            grunt.file.copy( abspath, filepath + path.sep + outdir + path.sep + subdir + path.sep + filename );
+                        }
+                    }
+                } );
             } );
         } );
     } );
