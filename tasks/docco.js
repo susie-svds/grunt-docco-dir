@@ -1,12 +1,28 @@
 // grunt-docco
-// https://github.com/DavidSouther/grunt-docco
+// https://github.com/joseph-jja/grunt-docco-dir
 //
-// Copyright (c) 2012 David Souther
+// Copyright (c) 2014 Joe Acosta
 // Licensed under the MIT license.
 
 "use strict";
 var docco = require( 'docco' ),
-    grunt = require( "grunt" );
+    grunt = require( "grunt" ),
+    path = require( "path" );
+
+function finish( outdir ) {
+
+    grunt.file.recurse( __dirname + path.sep + "../resources/default/", function ( abspath, rootdir, subdir, filename ) {
+
+        var filepath = __dirname + "/../../../";
+
+        if ( subdir && abspath ) {
+            grunt.file.mkdir( outdir + "/" + subdir );
+            grunt.file.copy( abspath, filepath + path.sep + outdir + path.sep + subdir + path.sep + filename );
+        } else if ( abspath ) {
+            grunt.file.copy( abspath, filepath + path.sep + outdir + path.sep + filename );
+        }
+    } );
+}
 
 module.exports = function ( grunt ) {
     grunt.registerMultiTask( 'docco', 'Docco processor.', function () {
@@ -26,10 +42,13 @@ module.exports = function ( grunt ) {
                 var out, opts, outdir;
                 out = name.substring( name.lastIndexOf( "/" ) );
 
-                outdir = outputDir + "/" + name.replace( out, "" ).replace( /\//g, "." );
+                outdir = outputDir + path.sep + name.replace( out, "" ).replace( /\//g, "." );
+
                 opts = {
                     args: [ name ],
-                    output: outdir
+                    output: outdir,
+                    css: __dirname + path.sep + '../resources/default/docco.css',
+                    template: __dirname + path.sep + '../resources/default/docco.jst'
                 };
                 //opts.output = outdir;
                 //console.log( opts );
@@ -42,18 +61,8 @@ module.exports = function ( grunt ) {
                 } );
                 // we need to copy from the docco resource directory to 
                 // the correct place, docco seems to fail at this
-                grunt.file.recurse( __dirname + "/../node_modules/docco/resources/classic/", function ( abspath, rootdir, subdir, filename ) {
-                    var filepath = __dirname + "/../../../",
-                        path = require( "path" );
-
-                    if ( subdir ) {
-                        grunt.file.mkdir( outdir + "/" + subdir );
-                        if ( abspath ) {
-                            grunt.file.copy( abspath, filepath + path.sep + outdir + path.sep + subdir + path.sep + filename );
-                        }
-                    }
-                } );
             } );
+            finish( outputDir );
         } );
     } );
 };
