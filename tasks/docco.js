@@ -7,7 +7,8 @@
 "use strict";
 var docco = require( 'docco' ),
     grunt = require( "grunt" ),
-    path = require( "path" );
+    path = require( "path" ),
+    underscore = require( "underscore" );
 
 function finish( outdir ) {
 
@@ -30,7 +31,8 @@ module.exports = function ( grunt ) {
             options, outputDir,
             fdone = 0,
             flength = this.files.length,
-            done = this.async();
+            done = this.async(),
+            indexFiles = [];
 
         options = task.options();
         outputDir = options.output;
@@ -39,11 +41,12 @@ module.exports = function ( grunt ) {
             // join 'args' and 'output' from options or file.dest according to docco.document() signature/first param
 
             file.src.forEach( function ( name ) {
-                var out, opts, outdir;
+                var out, opts, outdir, nName;
+
                 out = name.substring( name.lastIndexOf( "/" ) );
-
-                outdir = outputDir + path.sep + name.replace( out, "" ).replace( /\//g, "." );
-
+                nName = name.replace( out, "" ).replace( /\//g, "." );
+                outdir = outputDir + path.sep + nName;
+                indexFiles.push( nName + "/" + name.substring( name.lastIndexOf( "/" ) + 1 ).replace( ".js", ".html" ) );
                 opts = {
                     args: [ name ],
                     output: outdir,
@@ -63,6 +66,27 @@ module.exports = function ( grunt ) {
                 // the correct place, docco seems to fail at this
             } );
             finish( outputDir );
+            ( function ( indexFiles ) {
+                var idx, result, urls = '',
+                    listTemplate;
+                idx = grunt.file.read( __dirname + "/../resources/default/index.html" );
+
+                listTemplate = underscore.template( '<li><a href="<%= name %>"><%= name %></a></li>' );
+                underscore.each( indexFiles, function ( name ) {
+                    urls += listTemplate( {
+                        name: name
+                    } );
+                } );
+
+                result = underscore.template( idx, {
+                    title: 'Index',
+                    css: 'docco.css',
+                    urls: urls
+                } );
+
+                grunt.file.write( outputDir + "/index.html", result );
+
+            } )( indexFiles );
         } );
     } );
 };
