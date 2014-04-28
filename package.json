@@ -1,32 +1,21 @@
 {
-    "name": "grunt-docco",
+    "name": "grunt-docco-dir",
     "description": "Grunt Docco plugin.",
     "version": "0.1.1",
-    "homepage": "https://github.com/DavidSouther/grunt-docco",
+    "homepage": "https://github.com/joseph-jja/grunt-docco-dir",
     "author": {
-        "name": "David Souther",
-        "email": "davidsouther@gmail.com",
-        "url": "http://www.davidsouther.com"
+        "name": "Joe Acosta"
     },
-    "contributors": [
-        "Alasdair Mercer <mercer.alasdair@gmail.com>",
-        "Asa Ayers <Asa.Ayers@Gmail.com>",
-        "Brad Dougherty <me@brad.is>",
-        "Diego Fernandez <diegof79@gmail.com>",
-        "Ilya Radchenko <ilya@burstcreations.com>",
-        "Sam Breed <sam@quickleft.com>",
-        "Simon Elliott <simon@papercreatures.com>"
-    ],
     "repository": {
         "type": "git",
-        "url": "git://github.com/DavidSouther/grunt-docco.git"
+        "url": "git://github.com/joseph-jja/grunt-docco-dir.git"
     },
     "bugs": {
-        "url": "https://github.com/DavidSouther/grunt-docco/issues"
+        "url": "https://github.com/joseph-jja/grunt-docco-dir/issues"
     },
     "licenses": [ {
         "type": "MIT",
-        "url": "https://github.com/DavidSouther/grunt-docco/blob/master/LICENSE-MIT"
+        "url": "https://github.com/joseph-jja/grunt-docco-dir/blob/master/LICENSE-MIT"
     } ],
     "engines": {
         "node": "*"
