@@ -4,10 +4,12 @@ Grunt Docco plugin, extension.
 
 Docco takes a list of files and then generates documents based on all those files.  If two or more files have the same name
 then docco overwrites one of the files.  
+
 This plugin creates separate directories for the files based on the real directory. So if a file is in src/common/foo 
-it will end up in a directory called src.common.foo. This will allow 2 files with the same name to continue to exist.  
-This means you can have a widgets/Base.js and common/Base.js and neither will get overwritten.
-This plugin also creates an actual index.html page. In a future version of this plugin, that index will be customizable.
+it will end up in a directory called src.common.foo. This will allow 2 or more files, with the same name, in different directories, 
+ to get documentation generated for both with no issues.  This means you can have a widgets/Base.js and common/Base.js 
+and neither will get overwritten.  This plugin also creates an actual index.html page. In a future version of this plugin, 
+that index will be customizable.
 
 ## Getting Started
 Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-docco-dir --save-dev`
