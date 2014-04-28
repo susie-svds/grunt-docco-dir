@@ -1,14 +1,14 @@
-# grunt-docco
+# grunt-docco-dir
 
-Grunt Docco plugin.
+Grunt Docco plugin, extension.
 
 ## Getting Started
-Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-docco --save-dev`
+Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-docco-dir --save-dev`
 
 Then add this line to your project's `grunt.js` gruntfile:
 
 ```javascript
-grunt.loadNpmTasks('grunt-docco');
+grunt.loadNpmTasks('grunt-docco-dir');
 ```
 
 [grunt]: https://github.com/cowboy/grunt
