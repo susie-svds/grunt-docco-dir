@@ -46,7 +46,10 @@ module.exports = function ( grunt ) {
                 out = name.substring( name.lastIndexOf( "/" ) );
                 nName = name.replace( out, "" ).replace( /\//g, "." );
                 outdir = outputDir + path.sep + nName;
-                indexFiles.push( nName + "/" + name.substring( name.lastIndexOf( "/" ) + 1 ).replace( ".js", ".html" ) );
+                indexFiles.push( {
+                    filename: nName + "/" + name.substring( name.lastIndexOf( "/" ) + 1 ).replace( ".js", ".html" ),
+                    name: name.substring( name.lastIndexOf( "/" ) + 1 ).replace( ".js", ".html" )
+                } );
                 opts = {
                     args: [ name ],
                     output: outdir,
@@ -71,10 +74,11 @@ module.exports = function ( grunt ) {
                     listTemplate;
                 idx = grunt.file.read( __dirname + "/../resources/default/index.html" );
 
-                listTemplate = underscore.template( '<li><a href="<%= name %>"><%= name %></a></li>' );
-                underscore.each( indexFiles, function ( name ) {
+                listTemplate = underscore.template( '<li><a href="<%= filename %>"><%= name %></a></li>' );
+                underscore.each( indexFiles, function ( idx ) {
                     urls += listTemplate( {
-                        name: name
+                        filename: idx.filename,
+                        name: idx.name
                     } );
                 } );
 

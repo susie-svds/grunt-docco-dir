@@ -118,11 +118,15 @@ blockquote {
     margin: 10px 0 0;
     white-space: pre-wrap;
 }
-ul.sections {
+#documentationIndex, ul.sections {
     list-style: none;
     padding: 0 0 5px 0;
     ;
     margin: 0;
+}
+
+#documentationIndex {
+    padding-left: 10px;    
 }
 /*
   Force border-box so that % widths fit the parent
