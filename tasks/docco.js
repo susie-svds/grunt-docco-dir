@@ -48,7 +48,8 @@ module.exports = function ( grunt ) {
                 outdir = outputDir + path.sep + nName;
                 indexFiles.push( {
                     filename: nName + "/" + name.substring( name.lastIndexOf( "/" ) + 1 ).replace( ".js", ".html" ),
-                    name: name.substring( name.lastIndexOf( "/" ) + 1 ).replace( ".js", ".html" )
+                    sname: name.substring( name.lastIndexOf( "/" ) + 1 ),
+                    name: name
                 } );
                 opts = {
                     args: [ name ],
@@ -71,13 +72,24 @@ module.exports = function ( grunt ) {
             finish( outputDir );
             ( function ( indexFiles ) {
                 var idx, result, urls = '',
-                    listTemplate;
+                    sorted, listTemplate;
                 idx = grunt.file.read( __dirname + "/../resources/default/index.html" );
 
-                listTemplate = underscore.template( '<li><a href="<%= filename %>"><%= name %></a></li>' );
-                underscore.each( indexFiles, function ( idx ) {
+                sorted = indexFiles.sort( function ( a, b ) {
+                    if ( a.sname > b.sname ) {
+                        return 1;
+                    } else if ( a.sname < b.sname ) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                } );
+
+                listTemplate = underscore.template( '<tr><td><a href="<%= filename %>"><%= sname %></a></td><td><a href="<%= filename %>"><%= name %></a></td></tr>' );
+                underscore.each( sorted, function ( idx ) {
                     urls += listTemplate( {
                         filename: idx.filename,
+                        sname: idx.sname,
                         name: idx.name
                     } );
                 } );
