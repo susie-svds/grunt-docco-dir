@@ -118,15 +118,28 @@ blockquote {
     margin: 10px 0 0;
     white-space: pre-wrap;
 }
-#documentationIndex, ul.sections {
+ul.sections {
     list-style: none;
     padding: 0 0 5px 0;
     ;
     margin: 0;
 }
-
 #documentationIndex {
-    padding-left: 10px;    
+    padding-left: 10px;
+    border: collapse;
+}
+#documentationIndex td {
+    border: 1px solid black;
+}
+#documentationIndex td a {
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#documentationIndex th {
+    font-weight: bold;
+    font-family: 'novecento-bold';
+    border: 1px solid black;
 }
 /*
   Force border-box so that % widths fit the parent
