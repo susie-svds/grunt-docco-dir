@@ -34,12 +34,13 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+    min-width: 1200px;
 }
 #container {
     min-height: 100%;
 }
 a {
-    color: #000;
+    color: #2B88C7;
 }
 b,
 strong {
@@ -74,6 +75,11 @@ h6 {
 }
 h1 {
     margin-top: 40px;
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.2em;
 }
 hr {
     border: 0;
@@ -118,18 +124,29 @@ blockquote {
     margin: 10px 0 0;
     white-space: pre-wrap;
 }
+
+#nav{
+    width: 290px;
+    display: inline-block;
+}
 ul.sections {
     list-style: none;
     padding: 0 0 5px 0;
     ;
     margin: 0;
+    position: absolute;
+    top: 0;
+    left: 290px;
 }
 #documentationIndex {
     padding-left: 10px;
     border: collapse;
+    margin-top: 30px;
+    margin-left: 30px;
 }
 #documentationIndex td {
-    border: 1px solid black;
+    //border-bottom: 1px solid black;
+    padding-bottom: 5px;
 }
 #documentationIndex td a {
     display: block;
@@ -139,7 +156,17 @@ ul.sections {
 #documentationIndex th {
     font-weight: bold;
     font-family: 'novecento-bold';
-    border: 1px solid black;
+    //border: 1px solid black;
+    text-align: left;
+}
+
+#documentationIndex .folder {
+    font-weight: bold;
+}
+
+#documentationIndex .folder td {
+    padding-top: 20px;
+    font-family: 'novecento-bold';
 }
 /*
   Force border-box so that % widths fit the parent
@@ -217,7 +244,7 @@ ul.sections > li > div {
 #jump_page .source:first-child {}
 /*---------------------- Low resolutions (> 320px) ---------------------*/
 
-@media only screen and (min-width: 320px) {
+/*@media only screen and (min-width: 320px) {
     .pilwrap {
         display: none;
     }
@@ -248,15 +275,16 @@ ul.sections > li > div {
         font-size: 12px;
         padding: 0 0.2em;
     }
-}
+}*/
 /*----------------------  (> 481px) ---------------------*/
 
-@media only screen and (min-width: 481px) {
+@media only screen and (min-width: 101px) {
     #container {
         position: relative;
     }
     body {
-        background-color: #F5F5FF;
+        background-color: #F7F7F7;
+       // background-color: #F5F5FF;
         font-size: 15px;
         line-height: 21px;
     }
@@ -294,9 +322,11 @@ ul.sections > li > div {
         position: absolute;
         top: 0;
         bottom: 0;
+        left: 290px;
         width: 350px;
         background: #fff;
         border-right: 1px solid #e5e5ee;
+        border-left: 1px solid #e5e5ee;
         z-index: -1;
     }
     ul.sections > li > div.annotation ul,
@@ -367,6 +397,9 @@ ul.sections > li > div {
     #background {
         width: 525px;
     }
+
+
+
     ul.sections > li > div.annotation {
         max-width: 525px;
         min-width: 525px;
